@@ -990,8 +990,6 @@ public class SUTimeMain  {
   public static void processText(AnnotationPipeline pipeline, String text, String out, String date) throws IOException {
     PrintWriter pw = (out != null)? IOUtils.getPrintWriter(out):new PrintWriter(System.out);
     String string = textToAnnotatedXml(pipeline, text, date);
-    pw.println(string);
-    pw.flush();
     if (out != null) pw.close();
   }
 
@@ -1040,6 +1038,7 @@ public class SUTimeMain  {
     // Process arguments
     Properties props = StringUtils.argsToProperties(args);
 
+    props.setProperty("sutime.includeRange", "true");
     String in = props.getProperty("i");
     String date = props.getProperty("date");
     String dct = props.getProperty("tempeval2.dct");
@@ -1049,6 +1048,9 @@ public class SUTimeMain  {
     PYTHON = props.getProperty("python", PYTHON);
     InputType inputType = InputType.valueOf(inputTypeStr);
     AnnotationPipeline pipeline;
+    System.out.println("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>");
+    System.out.println("<DOC>");
+    System.out.println("<TEXT>");
     switch (inputType) {
       case TEXT:
         pipeline = getPipeline(props, true);
@@ -1073,6 +1075,8 @@ public class SUTimeMain  {
         processTempEval3(pipeline, in, out, eval);
         break;
     }
+    System.out.println("</TEXT>");
+    System.out.println("</DOC>");
   }
 
 }

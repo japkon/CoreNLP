@@ -27,7 +27,7 @@ public class Options {
   // Include nested time expressions
   boolean includeNested = false;
   // Create range for all temporals and include range attribute in timex annotation
-  boolean includeRange = false;
+  boolean includeRange = true;
   // Look for document date in the document text (if not provided)
   boolean searchForDocDate = false;
   // TODO: Add default country for holidays and default time format

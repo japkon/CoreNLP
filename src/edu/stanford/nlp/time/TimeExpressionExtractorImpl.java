@@ -132,7 +132,7 @@ public class TimeExpressionExtractorImpl implements TimeExpressionExtractor {
         Map<String,String> timexAttributes;
         try {
           timexAttributes = temporal.getTimexAttributes(timeIndex);
-          if (options.includeRange) {
+          if (true) {
             SUTime.Temporal rangeTemporal = temporal.getRange();
             if (rangeTemporal != null) {
               timexAttributes.put("range", rangeTemporal.toString());
@@ -148,6 +148,7 @@ public class TimeExpressionExtractorImpl implements TimeExpressionExtractor {
         Timex timex;
         try {
           timex = Timex.fromMap(text, timexAttributes);
+          System.out.println(timex);
         } catch (Exception e) {
           if (options.verbose) {
             logger.warn("Failed to process timex " + text + " with attributes " + timexAttributes);
